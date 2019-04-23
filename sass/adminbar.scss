@@ -134,7 +134,7 @@ html:lang(he-il) .rtl #wpadminbar * {
 #wpadminbar .shortlink-input {
   height: 25px !important;
   display: block;
-padding: 13px !important;
+padding: 8px !important;
   margin: 0;
 }
 
@@ -884,7 +884,7 @@ padding: 13px !important;
 
   #wpadminbar #wp-admin-bar-wp-logo > .ab-item .ab-icon:before {
     font: 28px/1 dashicons !important;
-    top: -3px;
+    top: -7px !important;
   }
 
   #wpadminbar .ab-icon,
@@ -945,7 +945,7 @@ padding: 13px !important;
 
   /* New Content */
   #wpadminbar #wp-admin-bar-new-content .ab-icon:before {
-    top: 0;
+    top: -5px !important;
     line-height: 53px;
     height: 46px !important;
     text-align: center;
@@ -972,7 +972,7 @@ padding: 13px !important;
     font-size: 34px;
     height: 46px;
     line-height: 47px;
-    top: 0;
+    top: -5px !important;
   }
 
   /* My Account */

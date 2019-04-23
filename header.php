@@ -46,8 +46,11 @@
                                     <option value="AnyCategory">همه دسته ها</option>
                                 <?php
 
-                                $categories = get_categories();
+                                $categories = get_categories(array(
+                                        "hide_empty"=>"0",
+                                ));
                                 foreach($categories as $category) {
+                                if ($category->parent == "")
                                     echo '<option value="' . get_category_link($category->term_id) . '">' . $category->name . '</option>';
                                 }
                                 ?>
@@ -58,16 +61,70 @@
                 </div>
              </div>
         </div>
-        <div class="row">
-            <div class="col-sm-12 slider">
-
-            </div>
-        </div>
     </div>
 </div>
+<div class="row">
+    <div class="container">
+        <div class="col-sm-12 slider">
+            <img class="img-fluid" src="<?php echo get_option('logo');  ?>" alt="header"">
+        </div>
+    <div class="col-sm-12 menu">
+        <ul class="nav nav-tabs" id="myTab" role="tablist">
+
+            <?php
+            foreach($categories as $category) {
+                if ($category->parent == "") {
+                    echo '<li class="nav-item col-lg-2 col-md-3 col-sm-6">';
+                    echo '<a class="nav-link" id="'. $category->slug.'-tab" data-toggle="tab" href="#'. $category->slug.'" role="tab" aria-selected="false" aria-controls="'. $category->term_id .'" >' ;
+                    echo '<i class="icon fa '.$category->term_font_icon.'"></i>'. $category->name.'</a>';
+                    echo ' </li>';
+                }
+            }
+            ?>
+        </ul>
+            <?php
+            foreach($categories as $category) {
+                if ($category->parent == "") {
+                    $categoryid=$category->term_id;
+                  $msg='<div class="col-sm-12 sub-menu">';
+                   $msg.= '<ul>';
+                    foreach($categories as $categoryc) {
+                        if ($categoryid == $categoryc->parent) {
+                            $msg.= '<li> '.$categoryc->name.'</li>';
+                        }
+                    }
+            $msg.='</ul>';
+            $msg.='</div>';
+                 echo '<div class="tab-pane deactive fade" id="'.$category->slug.'" role="tabpanel" aria-labelledby="'.$category->slug.'-tab">
+                 '.$msg.'
+                 </div>';
+                }
+            }
+            ?>
+    </div>
+    </div>
+</div>
+
+
+
+<div style="height: 200px;background-color: red">
+    <ul>
+        <li>11211313</li>
+        <li>11211313</li>
+        <li>11211313</li>
+        <li>11211313</li>
+        <li>11211313</li>
+        <li>11211313</li>
+        <li>11211313</li>
+        <li>11211313</li>
+        <li>11211313</li>
+    </ul>
+</div>
+
 <script src="<?php echo get_stylesheet_directory_uri(); ?>/js/jquery.js"></script>
 
 <script src="<?php echo get_stylesheet_directory_uri(); ?>/js/bootstrap.bundle.js"></script>
 <script src="<?php echo get_stylesheet_directory_uri(); ?>/js/bootstrap.min.js"></script>
 <script src="<?php echo get_stylesheet_directory_uri(); ?>/js/select.js"></script>
+<script src="<?php echo get_stylesheet_directory_uri(); ?>/js/until.js"></script>
 <script src="<?php echo get_stylesheet_directory_uri(); ?>/js/app.js"></script>

@@ -126,8 +126,10 @@ $link_color: #000;
     overflow: hidden;
     display:none;
     padding: 0 !important;
+    direction: rtl;
     &.overflow {
       overflow-y:scroll;
+      direction: rtl;
     }
     ul {
       margin:0;
