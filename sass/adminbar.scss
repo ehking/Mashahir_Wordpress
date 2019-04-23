@@ -132,7 +132,7 @@ html:lang(he-il) .rtl #wpadminbar * {
 #wpadminbar .quicklinks a,
 #wpadminbar .quicklinks .ab-empty-item,
 #wpadminbar .shortlink-input {
-  height: 32px;
+  height: 25px !important;
   display: block;
 padding: 13px !important;
   margin: 0;
@@ -358,7 +358,7 @@ padding: 13px !important;
 
 #wpadminbar .quicklinks .menupop ul.ab-sub-secondary,
 #wpadminbar .quicklinks .menupop ul.ab-sub-secondary .ab-submenu {
-  background: #464b50;
+  background: #0277bd !important;
 }
 
 #wpadminbar .quicklinks .menupop .ab-sub-secondary > li > a:hover,
