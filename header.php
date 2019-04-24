@@ -69,57 +69,66 @@
             <img class="img-fluid" src="<?php echo get_option('logo');  ?>" alt="header"">
         </div>
     <div class="col-sm-12 menu">
-        <ul class="nav nav-tabs" id="myTab" role="tablist">
+<!--        <ul class="nav nav-tabs" id="myTab" role="tablist">-->
+<!---->
+<!--            --><?php
+//            foreach($categories as $category) {
+//                if ($category->parent == "") {
+//                    echo '<li class="nav-item col-lg-2 col-md-3 col-sm-6">';
+//                    echo '<a class="nav-link" id="'. $category->slug.'-tab" data-toggle="tab" href="#'. $category->slug.'" role="tab" aria-selected="false" aria-controls="'. $category->term_id .'" >' ;
+//                    echo '<i class="icon fa '.$category->term_font_icon.'"></i>'. $category->name.'</a>';
+//                    echo ' </li>';
+//                }
+//            }
+//            ?>
+<!--        </ul>-->
+<!--            --><?php
+//            foreach($categories as $category) {
+//                if ($category->parent == "") {
+//                    $categoryid=$category->term_id;
+//                  $msg='<div class="col-sm-12 sub-menu">';
+//                   $msg.= '<ul>';
+//                    foreach($categories as $categoryc) {
+//                        if ($categoryid == $categoryc->parent) {
+//                            $msg.= '<li> '.$categoryc->name.'</li>';
+//                        }
+//                    }
+//            $msg.='</ul>';
+//            $msg.='</div>';
+//                 echo '<div class="tab-pane deactive fade" id="'.$category->slug.'" role="tabpanel" aria-labelledby="'.$category->slug.'-tab">
+//                 '.$msg.'
+//                 </div>';
+//                }
+//            }
+//            ?>
 
-            <?php
+        <ul id="main_menu">
+                 <?php
             foreach($categories as $category) {
                 if ($category->parent == "") {
-                    echo '<li class="nav-item col-lg-2 col-md-3 col-sm-6">';
-                    echo '<a class="nav-link" id="'. $category->slug.'-tab" data-toggle="tab" href="#'. $category->slug.'" role="tab" aria-selected="false" aria-controls="'. $category->term_id .'" >' ;
-                    echo '<i class="icon fa '.$category->term_font_icon.'"></i>'. $category->name.'</a>';
-                    echo ' </li>';
+                    echo '<li class="main_list"><a href="">'. $category->name.'<i class="fa '.$category->term_font.'"></i></a>';
+                    echo ' <ul class="animate fadeInDown">
+                    <ol>
+                        <a class="mmmk" href="">
+                            <li>'. $category->name.'</li>
+                        </a>
+                    </ol>
+                </ul>';
+                    echo '</li>';
                 }
             }
             ?>
         </ul>
-            <?php
-            foreach($categories as $category) {
-                if ($category->parent == "") {
-                    $categoryid=$category->term_id;
-                  $msg='<div class="col-sm-12 sub-menu">';
-                   $msg.= '<ul>';
-                    foreach($categories as $categoryc) {
-                        if ($categoryid == $categoryc->parent) {
-                            $msg.= '<li> '.$categoryc->name.'</li>';
-                        }
-                    }
-            $msg.='</ul>';
-            $msg.='</div>';
-                 echo '<div class="tab-pane deactive fade" id="'.$category->slug.'" role="tabpanel" aria-labelledby="'.$category->slug.'-tab">
-                 '.$msg.'
-                 </div>';
-                }
-            }
-            ?>
+        <br>
+        <p>rf</p>
+
     </div>
     </div>
 </div>
 
 
 
-<div style="height: 200px;background-color: red">
-    <ul>
-        <li>11211313</li>
-        <li>11211313</li>
-        <li>11211313</li>
-        <li>11211313</li>
-        <li>11211313</li>
-        <li>11211313</li>
-        <li>11211313</li>
-        <li>11211313</li>
-        <li>11211313</li>
-    </ul>
-</div>
+
 
 <script src="<?php echo get_stylesheet_directory_uri(); ?>/js/jquery.js"></script>
 
