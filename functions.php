@@ -17,10 +17,65 @@ add_theme_support( 'admin-bar', array( 'callback' => '__return_false' ) );
 function add_theme_menu_item()
 {
     add_menu_page("تنظیمات قالب", "تنظیمات قالب", "manage_options", "theme-panel", "theme_settings_page", null, 99);
+    add_submenu_page( 'theme-panel','dew','wewe','manage_options','t1','theme_settings_list_category');
 }
+
+function theme_settings_list_category(){
+
+    ?>
+    <div class="wrap">
+        <?php settings_errors(); ?>
+        <h1>دسته بندی قالب</h1>
+        <form method="post" action="options.php">
+            <?php
+            settings_fields("section1");
+            do_settings_sections("theme-options1");
+            submit_button();
+            ?>
+        </form>
+    </div>
+    <?php
+}
+
+
+function display_theme_category_fields (){
+    add_settings_section("section1", "", null, "theme-options1");
+    add_settings_field("category", "انتخاب دسته بندی", "display_list_category_element", "theme-options1", "section1");
+    register_setting("section1", "cat",'category_handle');
+}
+
+function category_handle(){
+        $cat=$_POST['cat'];
+        if (count($cat)==6){
+            return $cat;
+        }
+        else{
+            $cat=get_option('cat');
+            add_settings_error( "category", "category", "شما باید 6 تا از دسته بندی ها را انتخاب کنید", "error" );
+            return $cat;
+        }
+}
+
+
+function display_list_category_element()
+{
+        $categories = get_categories(array(
+        "hide_empty"=>"0",
+    ));
+        foreach ($categories as $category){
+            if ($category->parent == ""){
+                if (in_array($category->term_id,get_option('cat'))) $act="checked";else $act="";
+                echo '<label for="'.$category->name.'">'.$category->name.'</label>
+                <input type="checkbox"  value="'.$category->term_id.'" '.$act.' name="cat[]">';
+             }
+        }
+
+}
+
 function theme_settings_page(){
     ?>
     <div class="wrap">
+        <?php settings_errors(); ?>
         <h1>Theme Panel</h1>
         <form method="post" action="options.php" enctype="multipart/form-data">
             <?php
@@ -82,6 +137,7 @@ function handle_logo_upload()
 add_action("admin_init", "display_theme_panel_fields");
 add_action("admin_init", "display_theme_panel_fields");
 add_action("admin_menu", "add_theme_menu_item");
+add_action("admin_init", "display_theme_category_fields");
 //$facebook_url = get_option('facebook_url');
 //$twitter_url = get_option('twitter_url');
 //$logo_url = get_option('logo');
