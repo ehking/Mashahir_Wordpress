@@ -145,7 +145,8 @@ body{
 }
 .slider{
   background-color: white;
-  height: 400px;
+  //height: 400px;
+  margin-top: 10px;
   img{
     padding-top: 15px;
   }
@@ -153,10 +154,8 @@ body{
 .sub-menu{
   height: 200px;
 
-  background-image: url("../img/shamse vector.png"),linear-gradient(to right, #3e9487, #3c9081, #3a8c7a, #388874, #36846e);
-  background-repeat: no-repeat;
-  background-position: right;
-  background-size: contain;
+
+
 }
 .active{
   display: block!important;
@@ -208,7 +207,7 @@ body{
 #main_menu
 {
   float:right;
-  padding:0px;
+  //padding:0px;
   width:100%;
   height:100%;
   margin: 0;
@@ -221,40 +220,68 @@ body{
   color:#fff;
   list-style-type:none;
   float:right;
-  border-left:1px solid #666;
+  //border-left:1px solid #666;
   //padding-left:27px;
   //padding-right:27px;
   //font-family: IRANSANS;
   line-height: 32px;
-  width: 200px;
+  width: 16.6%;
   height: 200px;
-  background-color: #0A246A;
+  background-color: rgb(254, 253, 255);
   text-align: center;
 }
 #main_menu .main_list a:hover
 {
-  color:#ffb400 !important;
+  color: #1358d8 !important;
 }
 #main_menu .main_list a {
-  color: #fff !important;
+  color: #2e2e2e !important;
   text-decoration: none;
 }
 .main_list ul
 {
-  background:url('http://aminy.ir/wp-content/gallery/album/stationery-main.png')
-  left bottom #fff  no-repeat;
+  background-image: url("../img/shamse vector.png"),linear-gradient(to right, #3e9487, #3c9081, #3a8c7a, #388874, #36846e);
+  background-repeat: no-repeat;
+  background-position: right;
+  background-size: contain;
   position: absolute;
-  bottom: -45px;
-  right: 0;
-  width:100%;
+  //bottom: -1px;
+  left: -10px;
+  width:102%;
   padding:0px;
   float:right;
   padding-bottom:10px;
   z-index: 99999999999999999999999;
-  border: 1px #ccc solid;
-  box-shadow: 0px 2px 5px #d9d9d9;
+  //border: 1px #ccc solid;
+  -webkit-box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23) !important;
+  -moz-box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23) !important;
+  -ms-box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23) !important;
+  -o-box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23) !important;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23) !important;
   border-radius: 0 0 5px 5px;
-  margin-top: 40px;
+  margin-top: 10px;
+  height: 180px;
+}
+.main_list{
+  transition: all 1s !important;
+  i{
+    display: block;
+    font-size: 50px;
+    padding: 45px;
+  }
+  //&::after{
+  //  content: "";
+  //  color: rebeccapurple;
+  //  //position: absolute;
+  //  display: block;
+  //  width: 0;
+  //  height: 0;
+  //  border-left: 10px solid transparent;
+  //  border-right: 10px solid transparent;
+  //  margin: 0 auto;
+  //  border-bottom: 10px solid #3e9487;
+  //}
+
 }
 .main_list ul ol
 {
@@ -262,9 +289,10 @@ body{
   padding:0px;
   list-style-type:none;
   margin-left:30px;
-  border-left: 1px #eee solid;
+  //border-left: 1px #eee solid;
   width: 22.2%;
   padding-bottom: 10px;
+  padding-right: 10%;
 }
 .main_list ul ol:nth-child(4n+0) {
   border-left:1px solid #fff;
@@ -279,7 +307,7 @@ body{
   text-align: right;
 }
 .main_list ul ol a li {
-  color:#777 !important;
+  color:white !important;
   transition:0s all ease !important;
   margin-right: 15px
 }
@@ -292,13 +320,14 @@ body{
 }
 .main_list ul ol li:first-of-type
 {
-  list-style: none;
-  font-size:13px;
-  margin-top:10px;
+  list-style-type:disc;
+  font-size:16px;
+  margin-top:14px;
   color:#2E9AFE;
-  font-family: IRANSANS;
+  //font-family: IRANSANS;
   font-weight: normal;
   text-align: right;
+
 }
 .main_list ul ol a.mmmk li:first-of-type {
   color:#ffb400 !important;
@@ -308,11 +337,21 @@ body{
 {
   display:block;
   transition: all .3s ease .15s;
+
 }
-.main_list:hover body
-{
-background-color: red;
+.main_list:hover::after{
+  content: "";
+  color: rebeccapurple;
+  //position: absolute;
+  display: block;
+  width: 0;
+  height: 0;
+  border-left: 10px solid transparent;
+  border-right: 10px solid transparent;
+  margin: 0 auto;
+  border-bottom: 10px solid #3e9487;
 }
+
 .main_list ul
 {
   display:none;
