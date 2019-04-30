@@ -30,7 +30,7 @@
        ?>
         <div class="col-sm-12 sub_header">
             <div>
-                <a href="<?php echo wp_login_url(); ?> "><h3> ورود به حساب کاربری <i class="fa fa-user-circle"></i></h3></a>
+                <a href="<?php echo wp_login_url(); ?> "><h3> ورود به حساب کاربری <i class="fa fa-user"></i></h3></a>
             </div>
         </div>
     <?php
@@ -68,56 +68,18 @@
                      </div>
                 </div>
              </div>
-        </div>
-    </div>
-</div>
-<div class="row">
-    <div class="container">
-        <div class="col-sm-12 slider">
-            <?php putRevSlider("Homepage") ;?>
-        </div>
-        <div class="col-sm-12 menu">
-
-
-            <ul id="main_menu">
             <div class="row">
-                 <?php
-                 $n=1;
-            foreach($categories as $category) {
-
-                if (in_array($category->term_id,get_option('cat'))) {
-                    $categoryid=$category->term_id;
-                    echo '<li class="main_list"><a href=""><i class="fa '.$category->term_font_icon.'"></i>'. $category->name.' </a>';
-                    echo '<ul class="animate fadeInDown">';
-                    echo '<ol>';
-                    foreach ($categories as $categoryc){
-                        if ($n==4){
-                            echo "</ol><ol>";
-                            $n=0;
-                        }
-                        if ($categoryid == $categoryc->parent) {
-                            echo '<a class="" href="">
-                            <li>'. $categoryc->name.'</li>
-                        </a>';
-                            $n++;
-                        }
-                    }
-                echo '</ul></li>';
-                }
-            }
-
-            ?>
+                <div class="col-sm-12 single_menu">
+                   <ul>
+                       <li><a href="">صفحه اصلی</a></li>
+                       <li><a href="">تخصص ها</a></li>
+                       <li><a href="">افزودن شهر</a></li>
+                       <li><a href="">درباره ی سامانه</a></li>
+                   </ul>
+                </div>
             </div>
-        </ul>
-
-         </div>
-
+        </div>
     </div>
 </div>
 
 
-<div class="row">
-    <div class="col-sm-12">
-        <img class="img-fluid" src="<?php echo get_option('logo');  ?>" alt="header"">
-    </div>
-</div>

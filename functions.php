@@ -13,6 +13,12 @@
  * Twenty Nineteen only works in WordPress 4.7 or later.
  */
 add_theme_support( 'admin-bar', array( 'callback' => '__return_false' ) );
+add_theme_support( 'post-thumbnails' );
+
+add_filter('term_links-post_tag','limit_to_five_tags');
+function limit_to_five_tags($terms) {
+    return array_slice($terms,0,5,true);
+}
 
 function add_theme_menu_item()
 {
