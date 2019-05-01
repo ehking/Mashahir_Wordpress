@@ -31,7 +31,6 @@ function theme_settings_list_category(){
     ?>
     <div class="wrap">
         <?php settings_errors(); ?>
-        <h1>دسته بندی قالب</h1>
         <form method="post" action="options.php">
             <?php
             settings_fields("section1");
@@ -46,10 +45,24 @@ function theme_settings_list_category(){
 
 function display_theme_category_fields (){
     add_settings_section("section1", "", null, "theme-options1");
-    add_settings_field("category", "انتخاب دسته بندی", "display_list_category_element", "theme-options1", "section1");
+    add_settings_field("category", "انتخاب دسته بندی سایدبار", "display_list_category_element", "theme-options1", "section1");
+    add_settings_field("pages", "انتخاب  منو هدر", "display_list_page_element", "theme-options1", "section1");
     register_setting("section1", "cat",'category_handle');
+    register_setting("section1", "page",'page_handle');
 }
 
+function page_handle(){
+    $page=$_POST['page'];
+
+    if (count($page)<=4){
+        return $page;
+    }
+    else{
+        $page=get_option('page');
+        add_settings_error( "page", "page", "شما باید کمتر از 4 مورد را انتخاب کنید", "error" );
+        return $page;
+    }
+}
 function category_handle(){
         $cat=$_POST['cat'];
         if (count($cat)==6){
@@ -62,12 +75,26 @@ function category_handle(){
         }
 }
 
+function display_list_page_element(){
+    $page=get_pages();
+    echo '<h2>تنظیمات منو هدر سایت</h2>';
+    echo '<label for="">صفحه ی اصلی</label>
+                <input type="checkbox" checked disabled>';
+    foreach ($page as $page){
+        if (in_array($page->ID,get_option('page'))) $act="checked";else $act="";
+        echo '<label for="'.$page->post_title.'">'.$page->post_title.'</label>
+                <input type="checkbox"  value="'.$page->ID.'" '.$act.' name="page[]">';
+    }
+    echo '<hr><p style="font-size: 10px">شما باید کم تر از 4 صفحه برای نمایش در منو را مشخص کنید</p>';
+
+}
 
 function display_list_category_element()
 {
         $categories = get_categories(array(
         "hide_empty"=>"0",
     ));
+    echo '<h2>تنظیمات منو سایدبار</h2>';
         foreach ($categories as $category){
             if ($category->parent == ""){
                 if (in_array($category->term_id,get_option('cat'))) $act="checked";else $act="";
@@ -75,8 +102,10 @@ function display_list_category_element()
                 <input type="checkbox"  value="'.$category->term_id.'" '.$act.' name="cat[]">';
              }
         }
+    echo '<hr><p style="font-size: 10px">شما باید حتما در قسمت دسته بندی ها بیش از ۶ دسته بندی داشته باشید</p>';
 
 }
+
 
 function theme_settings_page(){
     ?>

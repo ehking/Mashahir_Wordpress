@@ -40,7 +40,7 @@
         <div class="container">
              <div class="row">
                 <div class="col-md-6 col-sm-12">
-                    <a href="#" id="headingimg"><img src="<?php echo get_stylesheet_directory_uri(); ?>/img/NastaliqOnline.png" alt=""></a>
+                    <a href="<?php bloginfo('url')?>" id="headingimg"><img src="<?php echo get_stylesheet_directory_uri(); ?>/img/NastaliqOnline.png" alt=""></a>
                 </div>
                 <div class="col-md-6 col-sm-12">
                     <div class="row">
@@ -71,10 +71,12 @@
             <div class="row">
                 <div class="col-sm-12 single_menu">
                    <ul>
-                       <li><a href="">صفحه اصلی</a></li>
-                       <li><a href="">تخصص ها</a></li>
-                       <li><a href="">افزودن شهر</a></li>
-                       <li><a href="">درباره ی سامانه</a></li>
+                       <li><a href="<?php bloginfo('url')?>">صفحه اصلی</a></li>
+                       <?php
+                       foreach (get_option('page') as $page){
+                            echo '<li><a href="'.get_page_link($page).'">'.get_page($page)->post_title.'</a></li>';
+                           }
+                       ?>
                    </ul>
                 </div>
             </div>

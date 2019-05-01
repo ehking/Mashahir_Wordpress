@@ -10,51 +10,98 @@
  */
 
 get_header();
+
 ?>
 
-	<section id="primary" class="content-area">
-		<main id="main" class="site-main">
-
-			<?php
-
-			/* Start the Loop */
-			while ( have_posts() ) :
-				the_post();
-
-				get_template_part( 'template-parts/content/content', 'single' );
-
-				if ( is_singular( 'attachment' ) ) {
-					// Parent post navigation.
-					the_post_navigation(
-						array(
-							/* translators: %s: parent post link */
-							'prev_text' => sprintf( __( '<span class="meta-nav">Published in</span><span class="post-title">%s</span>', 'twentynineteen' ), '%title' ),
-						)
-					);
-				} elseif ( is_singular( 'post' ) ) {
-					// Previous/next post navigation.
-					the_post_navigation(
-						array(
-							'next_text' => '<span class="meta-nav" aria-hidden="true">' . __( 'Next Post', 'twentynineteen' ) . '</span> ' .
-								'<span class="screen-reader-text">' . __( 'Next post:', 'twentynineteen' ) . '</span> <br/>' .
-								'<span class="post-title">%title</span>',
-							'prev_text' => '<span class="meta-nav" aria-hidden="true">' . __( 'Previous Post', 'twentynineteen' ) . '</span> ' .
-								'<span class="screen-reader-text">' . __( 'Previous post:', 'twentynineteen' ) . '</span> <br/>' .
-								'<span class="post-title">%title</span>',
-						)
-					);
-				}
-
-				// If comments are open or we have at least one comment, load up the comment template.
-				if ( comments_open() || get_comments_number() ) {
-					comments_template();
-				}
-
-			endwhile; // End of the loop.
-			?>
-
-		</main><!-- #main -->
-	</section><!-- #primary -->
-
+<div class="row breadcrumbs">
+    <div class="container ">
 <?php
-get_footer();
+if ( function_exists('yoast_breadcrumb') ) {
+    yoast_breadcrumb( '<div><p id="breadcrumbs">','</p></div>' );
+}else{
+    echo "Yoast Not install";
+}
+?>
+</div>
+</div>
+
+<div class="container">
+            <?php
+            // Start the Loop.
+            while ( have_posts() ) :
+                the_post();
+         if ( function_exists( 'ADDTOANY_SHARE_SAVE_KIT' ) )
+         $sh= ADDTOANY_SHARE_SAVE_KIT(array(
+                 'output_later'=>true
+         ));
+                if(function_exists('wp_ulike'))
+                   $link= wp_ulike('put');
+                else
+                    $link="wp_ulike no install";
+
+                echo ' <div class="row single_p">
+        <div class="col-sm-12 single_post" >
+            <div class="row">
+            <div class="col-sm-12 col-md-6">
+                <div class="row link_nav">
+                    <h6><a href="'.get_next_post()->guid.'" title="پست بعدی"> <i class="fa fa-angle-right"></i></a></h6>
+                    <h6><a href="'.get_previous_post()->guid.'" title="پست قبلی"> <i class="fa fa-angle-left"></i></a></h6>
+                    <h2><a href="#"> '.get_the_title().'</a></h2>
+                </div>
+                <div>
+                    <div class="row"><span>'.the_ratings('span',0,false).'</span><span>'." ( ".get_comments_number()."  دیدگاه کاربر  "." ) ".' </span></div>
+                </div>
+                <div class="row">
+                    <p>'.get_the_content().'</p>
+                </div>
+                <div class="row">
+                    '.$link.'
+                   
+                </div>
+                <hr>    
+                <div class="row">
+               
+                    <p>  اشتراک گذاری   </p>
+                             <div>
+                        '.$sh.'
+                        </div>
+                </div>
+            </div>
+            <div class="col-sm-12 col-md-6">
+                <img src="'.get_stylesheet_directory_uri().'/img/index/2.png" alt="" style="width: 90%">
+            </div>
+            </div>
+        </div>
+    </div>';
+
+            endwhile;
+            ?>
+</div>
+<div class="row">
+    <ul class="nav nav-tabs">
+        <li class="active"><a data-toggle="tab" href="#home" class="active">توضیحات</a></li>
+        <span>|</span>
+        <li><a data-toggle="tab" href="#menu1">نظرات</a></li>
+    </ul>
+</div>
+
+    <div class="container">
+        <div class="row tab_post">
+            <div class="col-sm-12">
+                <div id="home" class="tab-pane fade in active show di_none">
+                    <p><?php  echo get_the_content()?></p>
+                </div>
+                <div id="menu1" class="tab-pane fade di_none">
+                    <?php comments_template(); ?>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+<div>
+    <?php get_footer();  ?>
+</div>
+

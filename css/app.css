@@ -13316,6 +13316,8 @@ body {
     .rnd_post .wo-posts .wo-post h2 {
       text-align: right;
       color: #4DBAEA; }
+      .rnd_post .wo-posts .wo-post h2 a {
+        text-decoration: none; }
 
 .last_post h3 {
   font-size: 20px;
@@ -13356,6 +13358,8 @@ body {
     color: #4DBAEA;
     margin-top: 9px;
     font-size: 21px; }
+    .last_posts h3 a {
+      text-decoration: none; }
 
 .col-2dot4,
 .col-sm-2dot4,
@@ -13399,6 +13403,134 @@ body {
     -ms-flex: 0 0 20%;
     flex: 0 0 20%;
     max-width: 20%; } }
+.breadcrumbs {
+  padding: 1px;
+  background-color: white;
+  width: 100%;
+  margin: 0; }
+  .breadcrumbs p {
+    text-align: right;
+    margin-right: 24px;
+    margin-top: 15px;
+    margin-bottom: 15px; }
+
+.single_p {
+  margin-top: 20px;
+  background-color: white; }
+  .single_p .single_post {
+    padding: 40px; }
+    .single_p .single_post .link_nav h6 {
+      margin-top: 5px; }
+    .single_p .single_post .link_nav h6 a {
+      padding: 5px 10px 2px 10px;
+      margin-right: 5px;
+      border: 1px solid rgba(0, 0, 0, 0.52);
+      text-decoration: none; }
+      .single_p .single_post .link_nav h6 a i {
+        color: rgba(0, 0, 0, 0.52); }
+    .single_p .single_post .link_nav h2 {
+      margin-right: 10px; }
+      .single_p .single_post .link_nav h2 a {
+        text-decoration: none; }
+  .single_p p {
+    text-align: right;
+    word-break: break-all;
+    font-size: 17px;
+    color: #263238; }
+
+.post-ratings {
+  text-align: right; }
+
+.nav-tabs {
+  padding: 20px;
+  margin: 0 auto; }
+  .nav-tabs li .active {
+    display: inline !important;
+    color: #4DBAEA; }
+  .nav-tabs li a {
+    font-size: 28px;
+    color: #263238;
+    text-decoration: none;
+    padding: 15px; }
+  .nav-tabs span {
+    font-size: 31px; }
+
+.tab_post {
+  background-color: white;
+  padding: 20px; }
+  .tab_post p {
+    text-align: right;
+    word-break: break-all;
+    color: #263238;
+    font-size: 15px; }
+
+.di_none {
+  display: none; }
+
+/* =========================================================
+ * Comments
+ * ========================================================= */
+.comment {
+  text-align: right; }
+
+#comments h2 {
+  text-align: right;
+  font-size: 20px; }
+
+ol.comment-list {
+  margin: 0 0 1em;
+  padding: 0;
+  list-style-type: none;
+  text-indent: 0; }
+  ol.comment-list li.comment {
+    padding: 1em;
+    border-bottom: 1px solid #ddd; }
+    ol.comment-list li.comment .comment-author .says {
+      display: none; }
+    ol.comment-list li.comment div.vcard {
+      font-weight: em(14); }
+      ol.comment-list li.comment div.vcard img.avatar {
+        float: left;
+        margin: 0 20px 10px 0;
+        border: 5px solid #ccc; }
+    ol.comment-list li.comment div.comment-meta {
+      font-size: em(12); }
+      ol.comment-list li.comment div.comment-meta a {
+        color: #ccc; }
+    ol.comment-list li.comment p {
+      clear: both; }
+    ol.comment-list li.comment ul {
+      margin: 0 0 0 20px;
+      list-style: none;
+      font-size: em(12); }
+    ol.comment-list li.comment div.reply {
+      font-size: em(12); }
+      ol.comment-list li.comment div.reply a {
+        font-weight: bold; }
+    ol.comment-list li.comment ol.children {
+      margin: 12px;
+      list-style-type: none;
+      text-indent: 0; }
+      ol.comment-list li.comment ol.children li.depth-2 {
+        margin: 0 0 10px 10px;
+        border-left: 5px solid #ccc; }
+      ol.comment-list li.comment ol.children li.depth-3 {
+        margin: 0 0 10px 10px;
+        border-left: 5px solid #bbb; }
+      ol.comment-list li.comment ol.children li.depth-4 {
+        margin: 0 0 10px 10px;
+        border-left: 5px solid #aaa; }
+  ol.comment-list li.even {
+    background: #fff; }
+  ol.comment-list li.odd {
+    background: #f6f6f6; }
+  ol.comment-list li.parent {
+    border-left: 5px solid #ddd; }
+
+.wp_ulike_likers_wrapper:not(.wp_ulike_display_inline) {
+  right: 0;
+  left: unset !important; }
+
 /**
 jQuery Awselect
 Developed by: Prev Wong
