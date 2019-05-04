@@ -16,6 +16,105 @@ add_theme_support( 'admin-bar', array( 'callback' => '__return_false' ) );
 add_theme_support( 'post-thumbnails' );
 
 add_filter('term_links-post_tag','limit_to_five_tags');
+
+
+function register_my_menus() {
+    register_nav_menus(
+        array(
+            'Top_Menu' =>"منو بالا",
+            'Footer1' => 'Footer1',
+            'Footer2' => 'Footer2',
+            'Footer3' => 'Footer3',
+        )
+    );
+}
+add_action( 'init', 'register_my_menus' );
+
+
+
+
+function Es_get_menu_by_location( $location ) {
+    if( empty($location) ) return false;
+
+    $locations = get_nav_menu_locations();
+    if( ! isset( $locations[$location] ) ) return false;
+
+    $menu_obj = get_term( $locations[$location], 'nav_menu' );
+
+    return $menu_obj;
+}
+
+
+add_action( 'widgets_init', 'theme_slug_widgets_init' );
+function theme_slug_widgets_init() {
+    register_sidebar( array(
+        'name' => 'Footer',
+        'id' => 'Es_Footer',
+        'description' => 'اضافه کردن آیتم به قسمت فوتر سایت',
+        'before_widget' => '',
+        'after_widget'  => '',
+        'before_title'  => '<h2 class="widgettitle">',
+        'after_title'   => '</h2>',
+    ) );
+    register_sidebar( array(
+        'name' => 'img1',
+        'id' => 'Es_img1',
+        'description' => 'جایگاه عکس 1',
+        'before_widget' => '',
+        'after_widget'  => '',
+        'before_title'  => '<h2 class="widgettitle">',
+        'after_title'   => '</h2>',
+    ) );
+    register_sidebar( array(
+        'name' => 'img2',
+        'id' => 'Es_img2',
+        'description' => 'جایگاه عکس 2',
+        'before_widget' => '',
+        'after_widget'  => '',
+        'before_title'  => '<h2 class="widgettitle">',
+        'after_title'   => '</h2>',
+    ) );
+    register_sidebar( array(
+        'name' => 'img3',
+        'id' => 'Es_img3',
+        'description' => 'جایگاه عکس 3',
+        'before_widget' => '',
+        'after_widget'  => '',
+        'before_title'  => '<h2 class="widgettitle">',
+        'after_title'   => '</h2>',
+    ) );
+    register_sidebar( array(
+        'name' => 'img4',
+        'id' => 'Es_img4',
+        'description' => 'جایگاه عکس 4',
+        'before_widget' => '',
+        'after_widget'  => '',
+        'before_title'  => '<h2 class="widgettitle">',
+        'after_title'   => '</h2>',
+    ) );
+
+}
+
+function create_post_type() {
+    register_post_type( 'Mashahir',
+        array(
+            'labels' => array(
+                'name' =>'مشاهیر',
+                'singular_name' =>'مشاهیر'
+            ),
+            'supports' => array(
+                'title',
+                'author',
+                'comments',
+                'editor'),
+            'public' => true,
+            'has_archive' => true,
+
+        )
+    );
+}
+add_action( 'init', 'create_post_type' );
+
 function limit_to_five_tags($terms) {
     return array_slice($terms,0,5,true);
 }

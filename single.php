@@ -28,6 +28,10 @@ if ( function_exists('yoast_breadcrumb') ) {
 <div class="container">
             <?php
             // Start the Loop.
+            $pod = pods( 'mashahir', get_the_id() );
+            $related = $pod->field( 'img' );
+
+
             while ( have_posts() ) :
                 the_post();
          if ( function_exists( 'ADDTOANY_SHARE_SAVE_KIT' ) )
@@ -92,7 +96,7 @@ if ( function_exists('yoast_breadcrumb') ) {
                     <p><?php  echo get_the_content()?></p>
                 </div>
                 <div id="menu1" class="tab-pane fade di_none">
-                    <?php comments_template(); ?>
+                    <?php comments_template('comments.php'); ?>
                 </div>
             </div>
         </div>

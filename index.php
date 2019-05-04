@@ -12,19 +12,19 @@
         <div class="row index_img">
             <div class="col-sm-12 col-md-8">
                 <div class="col-sm-12" style="padding: 0;">
-                    <a href=""> <img src="<?php echo get_stylesheet_directory_uri(); ?>/img/index/4.png" alt="" style="height: 250px;width: 100%"></a>
+                    <?php dynamic_sidebar('img1') ?>
                 </div>
                 <div class="row">
-                    <div class="col-sm-12 col-md-7">
-                        <a href=""> <img src="<?php echo get_stylesheet_directory_uri(); ?>/img/index/2.png" alt="" style="height: 250px;width: 100%"></a>
+                    <div class="col-sm-12 col-md-7 img_250">
+                        <?php dynamic_sidebar('img3') ?>
                     </div>
-                    <div class="col-sm-12 col-md-5">
-                        <a href=""> <img src="<?php echo get_stylesheet_directory_uri(); ?>/img/index/3.png" alt="" style="height: 250px;width: 100%"></a>
+                    <div class="col-sm-12 col-md-5 img_250">
+                        <?php dynamic_sidebar('img4') ?>
                     </div>
                 </div>
             </div>
-            <div class="col-sm-12 col-md-4">
-                <a href=""> <img src="<?php echo get_stylesheet_directory_uri(); ?>/img/index/1.png" alt="" style="width: 100%;height: 96.5%;"></a>
+            <div class="col-sm-12 col-md-4 img_da">
+                <?php dynamic_sidebar('img2') ?>
             </div>
         </div>
     </div>
@@ -34,7 +34,7 @@
 
 <?php
 $args = array(
-    'post_type' => 'post',
+    'post_type' => 'Mashahir',
     'orderby'   => 'rand',
     'posts_per_page' => 2,
 );
@@ -71,7 +71,7 @@ if ( $the_query->have_posts() ) {
             </div>';
     }
 }else
-    echo '<p>no post</p>';
+    echo '<p>پستی وجود ندارد</p>';
 ?>
         </div>
     </div>
@@ -86,15 +86,15 @@ if ( $the_query->have_posts() ) {
     <div class="row">
         <?php
         $args = array(
-            'post_type' => 'post',
+            'post_type' => 'Mashahir',
             'orderby'   => '',
             'posts_per_page' => 5,
         );
-//        $the_query = new WP_Query( $args );
-        query_posts('posts_per_page=5');
-        if ( have_posts() ) {
-            while ( have_posts() ) {
-                the_post();
+        $the_query = new WP_Query( $args );
+//        query_posts('posts_per_page=5');
+        if ( $the_query->have_posts() ) {
+            while ( $the_query->have_posts() ) {
+                $the_query->the_post();
                 $tags=get_the_tag_list(' ',' , ' ,' ' );
                 if($tags){
                     $tags=explode(',',$tags);
@@ -118,6 +118,8 @@ if ( $the_query->have_posts() ) {
                     </div>
                 </div>';
              }
+        }else{
+            echo '<p>پستی وجود ندارد</p>';
         }
         ?>
     </div>

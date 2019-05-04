@@ -13,6 +13,7 @@
     <script src="<?php echo get_stylesheet_directory_uri(); ?>/js/select.js"></script>
     <script src="<?php echo get_stylesheet_directory_uri(); ?>/js/until.js"></script>
     <script src="<?php echo get_stylesheet_directory_uri(); ?>/js/app.js"></script>
+    <script src="<?php echo get_stylesheet_directory_uri(); ?>/js/alert.js"></script>
     <meta name="msapplication-TileColor" content="#2d89ef">
     <meta name="theme-color" content="#ffffff">
     <meta charset="<?php bloginfo( 'charset' ); ?>" />
@@ -50,7 +51,7 @@
                                     <input type="search" class="search-field" placeholder=" جست و جوی شخصیت ..." value="<?php echo esc_attr( get_search_query() ); ?>" name="s" title="جست و جوی شخصیت ..." />
                                 </label>
                                 <input type="submit" class="search-submit btn btn-success" value="جست و جو" />
-                                <select name="food_selector" data-placeholder="همه دسته ها">
+                                <select name="S_category" data-placeholder="همه دسته ها">
                                     <option value="AnyCategory">همه دسته ها</option>
                                 <?php
 
@@ -59,7 +60,7 @@
                                 ));
                                 foreach($categories as $category) {
                                 if ($category->parent == "")
-                                    echo '<option value="' . get_category_link($category->term_id) . '">' . $category->name . '</option>';
+                                    echo '<option value="'.$category->term_id.'">' . $category->name . '</option>';
                                 }
                                 ?>
                                 </select>
@@ -70,14 +71,7 @@
              </div>
             <div class="row">
                 <div class="col-sm-12 single_menu">
-                   <ul>
-                       <li><a href="<?php bloginfo('url')?>">صفحه اصلی</a></li>
-                       <?php
-                       foreach (get_option('page') as $page){
-                            echo '<li><a href="'.get_page_link($page).'">'.get_page($page)->post_title.'</a></li>';
-                           }
-                       ?>
-                   </ul>
+                       <?php wp_nav_menu( array( 'theme_location' => 'Top_Menu' ,'container'=>'')); ?>
                 </div>
             </div>
         </div>
