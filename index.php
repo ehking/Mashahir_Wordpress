@@ -51,8 +51,11 @@ if ( $the_query->have_posts() ) {
         }else{
             $ta="<span></span>";
         }
-         if(has_post_thumbnail()){
-            $img=get_the_post_thumbnail_url();
+        $pod = pods( 'mashahir', get_the_id() );
+        $related = $pod->field( 'img' );
+
+         if($related){
+            $img=$related[0]['guid'];
          } else {
           $img= get_stylesheet_directory_uri().'/img/index/1.png';
              }
@@ -65,7 +68,7 @@ if ( $the_query->have_posts() ) {
                         <p>'.get_the_content().'</p>
                     </div>
                     <div class="col-sm-12 col-md-4">
-                        <a href=""> <img src="'.$img.'" alt="" style="width: 100%;height: 70.5%;"></a>
+                        <a href=""> <img src="'.$img.'" alt="'.get_the_title().'" style="width: 170px;height: 200px"></a>
                     </div>
                 </div>
             </div>';
