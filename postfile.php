@@ -1,6 +1,9 @@
 <?php
 /**
- * Template Name: Your template name
+ * The template for displaying demo page
+ *
+ * template name: demo template
+ *
  */
 ini_set('display_errors',1);
 $name=$_POST['name'];

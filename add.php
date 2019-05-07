@@ -1,6 +1,47 @@
-<?php /* Template Name: Register_Page */
+<?php
+/* Template Name: Register_Page */
 get_header();
+session_start();
+if (isset($_SESSION['flash_messages'])){
+    $error=$_SESSION['flash_messages'];
+    switch ($error){
+        case 'sizeimg';
+        alert("سایز تصویر باید کمتر از ۲ مگ باشد",'error');
+        break;
+        case 'formatimg';
+            alert("فرمت عکس باید jpg/png/gif باشد",'error');
+            break;
+        case 'sizefile';
+            alert("سایز فایل باید کمتر از ۲ مگ باشد",'error');
+            break;
+        case 'formatfile';
+            alert("فرمت فایل باید pdf/doc باشد",'error');
+            break;
+            case 'validfrm';
+                alert("فیلد های الزارمی را پر کنید",'error');
+                break;
+        default:
+            alert($error,'error');
+            break;
+    }
+    unset($_SESSION['flash_messages']);
+}else if ($_SESSION['flash_messages_success']){
+    alert("درخواست شما ارسال و مورد بررسی قرار خواهد گرفت",'success');
+    unset($_SESSION['flash_messages_success']);
+}
+
+function alert($msgg,$ico){
+    if ($ico==="success")
+        $title="موفقیت";
+    elseif($ico==="error")
+        $title="خطا";
+
+ echo "
+   <script>swal('".$title."', '".$msgg."', '".$ico."');
+   </script>";
+}
 ?>
+
 <div class="row breadcrumbs">
     <div class="container ">
         <?php
@@ -18,7 +59,8 @@ get_header();
         <div class="col-sm-12 col-md-8 register">
             <h3>معرفی شخصیت جدید</h3>
             <p>لطفا مشخصات فرد مورد نظر خود را  در این فرم وارد نمایید  تا پس از تایید  در سامانه  قرار گیرد</p>
-            <form enctype="multipart/form-data" id="fupForm">
+            <form enctype="multipart/form-data" id="fupForm" action="<?php bloginfo('url')?>/wp-admin/admin-post.php" method="post">
+                <input type="hidden" name="action" value="my_action" />
                 <div class="form-group" >
                     <input type="text" class="form-control"  id="name" name="name" placeholder="نام و نام خانوادگی(یا نام پدر)">
                 </div>
@@ -26,28 +68,30 @@ get_header();
                     <input type="text" class="form-control" id="shohrat" name="shohrat" placeholder="شهرت">
                 </div>
                 <div class="form-group">
-                    <select id="cat" data-placeholder="تخصص یا تخصص ها">
+                    <select id="cat" data-placeholder="تخصص یا تخصص ها" name="cat">
                         <?php
                         $categories = get_categories(array(
                             "hide_empty"=>"0",
                         ));
                         foreach($categories as $category) {
                             if ($category->parent == "")
-                                echo '<option value="'.$category->name.'">' . $category->name . '</option>';
+                                echo '<option value="'.$category->name.'||'.$category->term_id.'">' . $category->name . '</option>';
                         }
                         ?>
                     </select>
                 </div>
                 <div class="form-group" >
-                    <input type="text" id="brithday" class="form-control"  name="brithday" placeholder="سال تولد" style="margin-top: 20px">
+                    <input type="number" id="brithday" class="form-control"  name="brithday" placeholder="سال تولد" style="margin-top: 20px">
                 </div>
                 <div class="form-group">
-                    <input type="file" id="img">
+                    <label for="file" class="sr-only" name="img_url" id="img_url">Select a file</label>
+                    <input type="file" id="img_url" name="img_url">
                 </div>
                 <div class="form-group">
                     <textarea class="form-control" id="body" name="body" rows="5"> زندگی شخص مورد نظر را شرح دهید ....</textarea>
                 </div>
-                <div class="form-group">
+                <div class="form-group ">
+                    <label for="file" class="sr-only" name="file" id="file">Select a file</label>
                     <input type="file" id="file" name="file">
                 </div>
                 <input type="submit" name="submit" class="btn btn-primary submitBtn" value="ثبت فرم"/>
@@ -105,59 +149,7 @@ get_header();
         </div>
     </div>
 </div>
-<script>
-    $(document).ready(function(e){
 
-        $("#fupForm").on('submit', function(e){
-            e.preventDefault();
-            $.ajax({
-                type: 'POST',
-                url: '<?php echo get_stylesheet_directory_uri(); ?>/postfile.php',
-                data: new FormData(this),
-                contentType: false,
-                cache: false,
-                processData:false,
-                beforeSend: function(){
-                    $('.submitBtn').attr("disabled","disabled");
-                    $('#fupForm').css("opacity",".5");
-                },
-                error:function(e){
-                    console.log(e)
-                },
-                success: function(msg){
-                    console.log(msg);
-                    if(msg == 'ok'){
-                        Swal.fire(
-                            'اطلاعات با موفقیت ثبت شد',
-                            'منتظر تایید مدیران سایت باشید',
-                            'success'
-                        )
-                    }else{
-                        Swal.fire(
-                            'اطلاعات چک خود کنید',
-                            '',
-                            'error'
-                        )
-                    }
-                    $('#fupForm').css("opacity","");
-                    $(".submitBtn").removeAttr("disabled");
-                }
-            });
-        });
-
-        //file type validation
-        // $("#file").change(function() {
-        //     var file = this.files[0];
-        //     var imagefile = file.type;
-        //     var match= ["image/jpeg","image/png","image/jpg"];
-        //     if(!((imagefile==match[0]) || (imagefile==match[1]) || (imagefile==match[2]))){
-        //         alert('Please select a valid image file (JPEG/JPG/PNG).');
-        //         $("#file").val('');
-        //         return false;
-        //     }
-        // });
-    });
-</script>
 <div>
     <?php get_footer(); ?>
 </div>

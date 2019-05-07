@@ -8,7 +8,6 @@
  * @subpackage Twenty_Nineteen
  * @since 1.0.0
  */
-
 /**
  * Twenty Nineteen only works in WordPress 4.7 or later.
  */
@@ -29,6 +28,90 @@ function register_my_menus() {
     );
 }
 add_action( 'init', 'register_my_menus' );
+
+
+
+add_action( 'admin_post_my_action', 'prefix_admin_my_action' );
+add_action( 'admin_post_nopriv_my_action', 'prefix_admin_add_foobar' );
+
+function prefix_admin_my_action() {
+    session_start();
+    if (!trim($_POST['name']) == '' && !trim($_POST['shohrat']) == ''  && !trim($_POST['brithday']) == '') {
+        if (!$_FILES['img_url']['name']=="") {
+            $maxsize = 2097152;
+            $acceptable = array(
+                'image/jpeg',
+                'image/jpg',
+                'image/gif',
+                'image/png'
+            );
+            if (($_FILES['img_url']['size'] >= $maxsize) || ($_FILES["img_url"]["size"] == 0)) {
+                $error = 'sizeimg';
+                $_SESSION['flash_messages']=$error;
+                header('location:../register');
+                exit();
+            }
+            if ((in_array($_FILES['uploaded_file']['type'], $acceptable)) && (empty($_FILES["uploaded_file"]["type"]))) {
+                $error = 'formatimg';
+                $_SESSION['flash_messages']=$error;
+                header('location:../register');
+                exit();
+            }
+            $upload_overrides = array('test_form' => false);
+            $moveimg = wp_handle_upload($_FILES['img_url'], $upload_overrides);
+
+            if ($moveimg && isset($moveimg['error'])) {
+                $_SESSION['flash_messages']=$moveimg['error'];
+                header('location:../register');
+                exit();
+            }
+        }
+        if (! $_FILES['file']['name']=="") {
+            $maxsize = 2097152;
+            $acceptable = array(
+                'application/pdf',
+                'application/msword (.doc)',
+                'application/vnd.openxmlformats-officedocument.wordprocessingml.document(.docx)',
+            );
+            if (($_FILES['img_url']['size'] >= $maxsize) || ($_FILES["img_url"]["size"] == 0)) {
+                $error = 'sizefile';
+                $_SESSION['flash_messages']=$error;
+                header('location:../register');
+                exit();
+            }
+            if ((in_array($_FILES['uploaded_file']['type'], $acceptable)) && (empty($_FILES["uploaded_file"]["type"]))) {
+                $error = 'formatfile';
+                $_SESSION['flash_messages']=$error;
+                header('location:../register');
+                exit();
+            }
+            $upload_overrides = array('test_form' => false);
+            $movefile = wp_handle_upload($_FILES['file'], $upload_overrides);
+
+            if ($movefile && isset($movefile['error'])) {
+                $_SESSION['flash_messages']=$movefile['error'];
+                header('location:../register');
+                exit();
+            }
+        }
+        global $wpdb;
+        $wpdb->insert('wp_form_data', array(
+            'name_m' => $_POST['name'],
+            'shohrat' => $_POST['shohrat'],
+            'cat' => $_POST['cat'],
+            'brithday' => $_POST['brithday'],
+            'img_url' => $moveimg['url'],
+            'body' => $_POST['body'],
+            'file' => $movefile['url']
+        ));
+        $_SESSION['flash_messages_success']='success';
+        header('location:../register');
+        exit();
+    }
+    $_SESSION['flash_messages']='validfrm';
+    header('location:../register');
+    exit();
+}
 
 
 
