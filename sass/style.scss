@@ -126,8 +126,11 @@ body{
 .container {
   max-width:none !important;
   }
+  .header .search-header{
+    width: 97%;
+  }
   input[type=search] {
-    width: 130px !important;
+    width: 60px !important;
     font-size: 12px;
   }
   .btn-success {
@@ -523,9 +526,9 @@ body{
   height: 100%;
   padding: 30px;
   @include shadow;
-  transition: all 0.6s;
+  transition: all 0.6s !important;
   &:hover{
-    @include hover_shadow;
+    @include hover_shadow ;
   }
 p{
     text-align: center;
@@ -537,7 +540,6 @@ p{
     }
   a{
     color: #263238;
-    text-decoration: none;
   }
   }
   h3{
@@ -814,6 +816,7 @@ ol.comment-list{
   background-color: white;
   padding: 50px;
   text-align: right;
+  height: 100%;
   h3{
     text-align: center;
     color:#4DBAEA ;
@@ -853,7 +856,51 @@ ol.comment-list{
   text-align: center;
   margin-top: 40px;
 }
-
+.order_by{
+  padding: 15px;
+  height: 60px;
+  margin-top: 20px;
+  background-color: white;
+  p{
+    margin-left: 90px;
+    padding-top: 10px;
+    display: inline;
+  }
+}
+.category_list{
+  padding: 1px 40px 40px 40px;
+  margin-top: 20px;
+  background-color: white;
+}
+.contents{
+  text-align: right;
+  padding-right: 40px;
+  h2{
+    a{
+      text-decoration: none;
+    }
+  }
+  p{
+    margin-top:20px;
+    color: #263238;
+  }
+}
+.margin_top_20{
+  margin-top: 50px;
+}
+#SearchParameters.in,
+#SearchParameters.collapsing {
+  display: block!important;
+}
+.nav_mobile{
+  float: right;
+  ul li{
+    list-style: none;
+    a{
+      color: #263238;
+    }
+  }
+}
 
 
 

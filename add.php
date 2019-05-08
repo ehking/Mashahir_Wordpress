@@ -105,7 +105,7 @@ function alert($msgg,$ico){
                         $args = array(
                             'post_type' => 'Mashahir',
                             'orderby'   => '',
-                            'posts_per_page' => 5,
+                            'posts_per_page' => 3,
                         );
                         $the_query = new WP_Query( $args );
                         //        query_posts('posts_per_page=5');

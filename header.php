@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html <?php language_attributes(); ?>>
 <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="apple-touch-icon" sizes="76x76" href="<?php echo get_stylesheet_directory_uri(); ?>/ico/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="<?php echo get_stylesheet_directory_uri(); ?>/ico/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="<?php echo get_stylesheet_directory_uri(); ?>/ico/favicon-16x16.png">
@@ -14,6 +15,7 @@
     <script src="<?php echo get_stylesheet_directory_uri(); ?>/js/until.js"></script>
     <script src="<?php echo get_stylesheet_directory_uri(); ?>/js/app.js"></script>
     <script src="<?php echo get_stylesheet_directory_uri(); ?>/js/alert.js"></script>
+    <script src="<?php echo get_stylesheet_directory_uri(); ?>/js/swiper.js"></script>
     <meta name="msapplication-TileColor" content="#2d89ef">
     <meta name="theme-color" content="#ffffff">
     <meta charset="<?php bloginfo( 'charset' ); ?>" />
@@ -37,13 +39,69 @@
     <?php
     }
     ?>
+<!--    <button class="d-block d-sm-none" data-toggle="collapse" data-target="#SearchParameters">Toggle it</button>-->
+<!---->
+<!--    <div class="d-none  col-md-12 col-sm-12 SearchParameters" id="SearchParameters">-->
+<!--        wefwef-->
+<!--    </div>-->
+
+
+    <nav class="d-lg-none d-xl-none col-sm-12 navbar navbar-expand-lg navbar-light bg-light">
+        <button class="navbar-toggler d-block d-sm-none" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+
+        </button>
+        <a class="" href="#" style="margin: 0 auto;"><?php bloginfo('name')?></a>
+
+        <div class="d-lg-none d-xl-none collapse col-sm-12 nav_mobile" id="navbarSupportedContent">
+            <ul>
+                <li>
+                    <div class="row ">
+                        <div class="col-sm-12">
+                            <?php wp_nav_menu( array( 'theme_location' => 'Top_Menu' ,'container'=>'')); ?>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <hr>
+                        <h3>بخش بندی</h3>
+                        <?php
+                        $categories = get_categories(array(
+                            "hide_empty"=>"0",
+                        ));
+                        $n=1;
+                        foreach($categories as $category) {
+                            if (in_array($category->term_id,get_option('cat'))) {
+                                $categoryid=$category->term_id;
+                                echo ' <li class="nav-item dropdown">';
+                                echo ' <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> '.$category->name.'</a>';
+                              echo  ' <div class="dropdown-menu" aria-labelledby="navbarDropdown">';
+                                foreach ($categories as $categoryc){
+                                    if ($categoryid == $categoryc->parent) {
+                                        echo ' <a class="dropdown-item" href="'.get_category_link($categoryc->term_id).'">'.$categoryc->name.'</a>';
+                                    }
+                                }
+                                echo '</div>';
+                            }
+                        }
+    //                    ?>
+
+                    </li>
+                </li>
+            </ul>
+
+            <?php get_template_part('temp/menu_category') ?>
+        </div>
+    </nav>
+
+
     <div class="col-sm-12 header <?php if ( is_admin_bar_showing() ) {echo "margin_top_55";}?>">
         <div class="container">
              <div class="row">
-                <div class="col-md-6 col-sm-12">
-                    <a href="<?php bloginfo('url')?>" id="headingimg"><img src="<?php echo get_stylesheet_directory_uri(); ?>/img/NastaliqOnline.png" alt=""></a>
+                <div class="col-sm-12 col-md-6">
+                    <a href="<?php bloginfo('url')?>" id="headingimg"><img src="<?php echo get_stylesheet_directory_uri(); ?>/img/NastaliqOnline.png" alt="Logo" style="width: 100%;max-width: 350px;"></a>
                 </div>
-                <div class="col-md-6 col-sm-12">
+                <div class="col-sm-12 col-md-6">
                     <div class="row">
                         <div class="search-header">
                             <form role="search" method="get" class="search-form" action="<?php echo home_url( '/' ); ?>">
@@ -69,8 +127,8 @@
                      </div>
                 </div>
              </div>
-            <div class="row">
-                <div class="col-sm-12 single_menu">
+            <div class="row ">
+                <div class="col-sm-12 single_menu d-none d-md-block d-lg-block d-xl-block">
                        <?php wp_nav_menu( array( 'theme_location' => 'Top_Menu' ,'container'=>'')); ?>
                 </div>
             </div>

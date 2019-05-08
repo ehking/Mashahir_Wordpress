@@ -31,7 +31,13 @@ if ( function_exists('yoast_breadcrumb') ) {
             $pod = pods( 'mashahir', get_the_id() );
             $related = $pod->field( 'img' );
 
-
+            if ($related){
+                foreach ($related as $img){
+                    $row.='<div class="swiper-slide" style="text-align: center"><img src="'.$img['guid'].'" alt="'.$img['post_title'].'" style="max-height: 400px"></div>';
+                }
+            }else{
+                $row='<img  src="'.get_stylesheet_directory_uri().'/img/index/1.png'.'" alt="" style="max-height: 400px;margin: 0 auto;">';
+            }
             while ( have_posts() ) :
                 the_post();
          if ( function_exists( 'ADDTOANY_SHARE_SAVE_KIT' ) )
@@ -56,7 +62,7 @@ if ( function_exists('yoast_breadcrumb') ) {
                     <div class="row"><span>'.the_ratings('span',0,false).'</span><span>'." ( ".get_comments_number()."  دیدگاه کاربر  "." ) ".' </span></div>
                 </div>
                 <div class="row">
-                    <p>'.get_the_content().'</p>
+                   <p>'.substr(get_the_content(),0,600).'...'.'</p>
                 </div>
                 <div class="row">
                     '.$link.'
@@ -72,7 +78,19 @@ if ( function_exists('yoast_breadcrumb') ) {
                 </div>
             </div>
             <div class="col-sm-12 col-md-6">
-                <img src="'.get_stylesheet_directory_uri().'/img/index/2.png" alt="" style="width: 90%">
+            
+            <div class="swiper-container">
+    <div class="swiper-wrapper">
+    
+     '.$row.'
+    </div>
+    
+    <!-- Add Arrows -->
+    <div class="swiper-pagination"></div>
+    <div class="swiper-button-next"></div>
+    <div class="swiper-button-prev"></div>
+  </div>
+               
             </div>
             </div>
         </div>
@@ -80,6 +98,21 @@ if ( function_exists('yoast_breadcrumb') ) {
 
             endwhile;
             ?>
+    <script>
+        var swiper = new Swiper(".swiper-container", {
+            autoHeight: true,
+            loop:true,
+            pagination: {
+                el: ".swiper-pagination",
+                type: "bullets",
+            },
+            navigation: {
+                nextEl: ".swiper-button-next",
+                prevEl: ".swiper-button-prev",
+            },
+
+        });
+    </script>
 </div>
 <div class="row">
     <ul class="nav nav-tabs">

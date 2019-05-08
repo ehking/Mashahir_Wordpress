@@ -1,4 +1,4 @@
-<div class="col-sm-12 menu">
+<div class="col-sm-12 menu d-none d-md-block d-lg-block d-xl-block">
     <ul id="main_menu">
         <div class="row">
             <?php

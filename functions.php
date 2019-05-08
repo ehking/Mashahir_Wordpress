@@ -192,6 +192,7 @@ function create_post_type() {
                 'editor'),
             'public' => true,
             'has_archive' => true,
+            'taxonomies'  => array( 'category' ),
 
         )
     );
