@@ -13162,6 +13162,13 @@ body {
   display: block;
   font-size: 50px;
   padding: 45px; }
+.main_list img {
+  width: 70px;
+  max-height: 70px;
+  display: block;
+  margin: 0 auto;
+  margin-top: 50px;
+  margin-bottom: 30px; }
 
 .main_list ul ol {
   float: right;
@@ -13211,7 +13218,7 @@ body {
   visibility: visible;
   /* shows sub-menu */
   opacity: 1;
-  z-index: 1;
+  z-index: 10;
   height: 180px;
   transition: all 0.6s; }
 
@@ -13302,7 +13309,7 @@ body {
     margin-top: 20px; }
     .rnd_post .wo-posts .row {
       background-color: white;
-      padding: 50px 30px 0 5px;
+      padding: 50px 1px 0 5px;
       height: 100%;
       margin: 5px 0 5px 0;
       border-radius: 6px; }
@@ -13460,7 +13467,9 @@ body {
 
 .tab_post {
   background-color: white;
-  padding: 20px; }
+  padding: 20px;
+  text-align: right;
+  line-height: 40px; }
   .tab_post p {
     text-align: right;
     word-break: break-all;
@@ -13542,7 +13551,7 @@ ol.comment-list {
 
 .register {
   background-color: white;
-  padding: 50px;
+  padding: 40px;
   text-align: right;
   height: 100%; }
   .register h3 {
@@ -13614,6 +13623,27 @@ ol.comment-list {
     list-style: none; }
     .nav_mobile ul li a {
       color: #263238; }
+
+input[type=file] {
+  width: 100%; }
+
+.Top_Menu_mobile ul {
+  text-align: right;
+  padding: 0; }
+  .Top_Menu_mobile ul li {
+    padding: 10px;
+    transition: all 1s; }
+    .Top_Menu_mobile ul li:hover {
+      color: blue; }
+
+.Cat_Menu_mobile {
+  text-align: right;
+  padding: 0; }
+  .Cat_Menu_mobile li {
+    padding: 10px;
+    transition: all 1s; }
+    .Cat_Menu_mobile li:hover {
+      color: blue; }
 
 /**
 jQuery Awselect

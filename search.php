@@ -30,8 +30,8 @@ get_header();
         }else{
             $search=$_GET['s'];
         }
-        $paged = (get_query_var('paged')) ? get_query_var('paged') : 1;
-        $args = array('posts_per_page' => 3, 'paged' => $paged ,'post_type'=>'Mashahir', 'cat'=>$cat, 's'=>$search);
+        $paged = get_query_var('paged') ? get_query_var('paged') : 1;
+        $args = array('posts_per_page' => 10, 'paged' => $paged ,'post_type'=>'Mashahir', 'cat'=>$cat, 's'=>$search);
         $the_query=new WP_Query($args);
         ?>
             <div class="row">
@@ -64,7 +64,7 @@ get_header();
                     <img src="'.$img.'" alt="'.get_the_title().'" style="height: 278px;width: 198px">
                 </div>
                 <div class="col-sm-12 col-md-8 contents">
-                    <h2><a href="">'.get_the_title().'</a></h2>
+                    <h2><a href="'.get_permalink().'">'.get_the_title().'</a></h2>
                     <div>
                         <div class="row"><span>'.the_ratings('span',0,false).'</span><span>'." ( ".get_comments_number()."  دیدگاه کاربر  "." ) ".' </span></div>
                     </div>
@@ -83,7 +83,14 @@ get_header();
                         ?>
                     </div>
                     <div class="col-sm-12" style="padding: 20px">
-                        <?php echo paginate_links(); ?>
+                        <?php $big = 999999999; // need an unlikely integer
+                        echo paginate_links( array(
+                            'base' => str_replace( $big, '%#%', get_pagenum_link( $big ) ),
+                            'format' => '?paged=%#%',
+                            'current' => max( 1, get_query_var('paged') ),
+                            'total' => $the_query->max_num_pages
+                        ) );
+                        wp_reset_postdata(); ?>
                     </div>
                 </div>
             </div>

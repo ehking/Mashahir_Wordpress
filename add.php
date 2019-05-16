@@ -2,6 +2,10 @@
 /* Template Name: Register_Page */
 get_header();
 session_start();
+?>
+<script src='https://www.google.com/recaptcha/api.js'></script>
+<?php
+ini_set('display_errors',1);
 if (isset($_SESSION['flash_messages'])){
     $error=$_SESSION['flash_messages'];
     switch ($error){
@@ -56,7 +60,8 @@ function alert($msgg,$ico){
 
 <div class="container">
     <div class="row">
-        <div class="col-sm-12 col-md-8 register">
+        <div class="col-sm-12 col-md-8 ">
+            <div class="col-sm-12 register">
             <h3>معرفی شخصیت جدید</h3>
             <p>لطفا مشخصات فرد مورد نظر خود را  در این فرم وارد نمایید  تا پس از تایید  در سامانه  قرار گیرد</p>
             <form enctype="multipart/form-data" id="fupForm" action="<?php bloginfo('url')?>/wp-admin/admin-post.php" method="post">
@@ -74,7 +79,7 @@ function alert($msgg,$ico){
                             "hide_empty"=>"0",
                         ));
                         foreach($categories as $category) {
-                            if ($category->parent == "")
+//                            if ($category->parent == "")
                                 echo '<option value="'.$category->name.'||'.$category->term_id.'">' . $category->name . '</option>';
                         }
                         ?>
@@ -84,7 +89,7 @@ function alert($msgg,$ico){
                     <input type="number" id="brithday" class="form-control"  name="brithday" placeholder="سال تولد" style="margin-top: 20px">
                 </div>
                 <div class="form-group">
-                    <label for="file" class="sr-only" name="img_url" id="img_url">Select a file</label>
+                    <label for="file" class="sr-only" name="img_url" id="img_url">jnwef</label>
                     <input type="file" id="img_url" name="img_url">
                 </div>
                 <div class="form-group">
@@ -94,10 +99,14 @@ function alert($msgg,$ico){
                     <label for="file" class="sr-only" name="file" id="file">Select a file</label>
                     <input type="file" id="file" name="file">
                 </div>
+                <div class="form-group">
+                    <div class="g-recaptcha" data-sitekey="6LclaqMUAAAAAP5XV5vRMrYo1seBvtYdaz57W68A"></div>
+                </div>
                 <input type="submit" name="submit" class="btn btn-primary submitBtn" value="ثبت فرم"/>
             </form>
         </div>
-        <div class="col-sm-12 col-md-4 ">
+        </div>
+        <div class="col-sm-12 col-md-4 " >
                 <div class="col-sm-12 last_p">
                     <h3>آخرین اشخاص افزوده شده</h3>
                     <div class="row">

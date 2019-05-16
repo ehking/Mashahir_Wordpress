@@ -9,7 +9,14 @@
             foreach($categories as $category) {
                 if (in_array($category->term_id,get_option('cat'))) {
                     $categoryid=$category->term_id;
-                    echo '<li class="main_list"><a href="'.get_category_link($category->term_id).'"><i class="fa '.$category->term_font_icon.'"></i>'. $category->name.' </a>';
+                   $img_cat= templ_get_the_icon(array('size'=> 'thumbnail'),'category',$category->term_id);
+                   if ($img_cat){
+                       $img='<img src="'.$img_cat[1][0].'" alt="'.$category->name.'">';
+                   }else{
+                       $img='<i class="fa fa-low-vision"></i>';
+                   }
+
+                    echo '<li class="main_list"><a href="'.get_category_link($category->term_id).'">'.$img. $category->name.' </a>';
                     echo '<ul class="animate fadeInDown">';
                     echo '<ol>';
                     foreach ($categories as $categoryc){

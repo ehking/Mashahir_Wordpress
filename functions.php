@@ -11,6 +11,18 @@
 /**
  * Twenty Nineteen only works in WordPress 4.7 or later.
  */
+
+////////////////////////////////////////////////////////////////////////
+// BuddyPress Profile URL Integration //////////////////////////////////
+////////////////////////////////////////////////////////////////////////
+add_filter('wpdiscuz_profile_url', 'wpdiscuz_bp_profile_url', 10, 2);
+function wpdiscuz_bp_profile_url($profile_url, $user) {
+    if ($user && class_exists('BuddyPress')) {
+        $profile_url = bp_core_get_user_domain($user->ID);
+    }
+    return $profile_url;
+}
+
 add_theme_support( 'admin-bar', array( 'callback' => '__return_false' ) );
 add_theme_support( 'post-thumbnails' );
 
@@ -32,11 +44,12 @@ add_action( 'init', 'register_my_menus' );
 
 
 add_action( 'admin_post_my_action', 'prefix_admin_my_action' );
-add_action( 'admin_post_nopriv_my_action', 'prefix_admin_add_foobar' );
+add_action( 'admin_post_nopriv_my_action', 'prefix_admin_my_action' );
 
 function prefix_admin_my_action() {
     session_start();
-    if (!trim($_POST['name']) == '' && !trim($_POST['shohrat']) == ''  && !trim($_POST['brithday']) == '') {
+//    ini_set('display_errors',1);
+    if (!trim($_POST['name']) == '' && !trim($_POST['shohrat']) == ''  && !trim($_POST['brithday']) == '' && !trim($_POST['cat'])=='') {
         if (!$_FILES['img_url']['name']=="") {
             $maxsize = 2097152;
             $acceptable = array(
@@ -102,7 +115,8 @@ function prefix_admin_my_action() {
             'brithday' => $_POST['brithday'],
             'img_url' => $moveimg['url'],
             'body' => $_POST['body'],
-            'file' => $movefile['url']
+            'file' => $movefile['url'],
+            'create_at'=>date("Y-m-d H:i:s")
         ));
         $_SESSION['flash_messages_success']='success';
         header('location:../register');
@@ -185,6 +199,7 @@ function create_post_type() {
                 'name' =>'مشاهیر',
                 'singular_name' =>'مشاهیر'
             ),
+
             'supports' => array(
                 'title',
                 'author',
@@ -192,7 +207,10 @@ function create_post_type() {
                 'editor'),
             'public' => true,
             'has_archive' => true,
+            'editor'=>true,
             'taxonomies'  => array( 'category' ),
+            'show_in_rest'=>true,
+            'rest_base'=> 'Mashahir',
 
         )
     );
@@ -205,8 +223,8 @@ function limit_to_five_tags($terms) {
 
 function add_theme_menu_item()
 {
-    add_menu_page("تنظیمات قالب", "تنظیمات قالب", "manage_options", "theme-panel", "theme_settings_page", null, 99);
-    add_submenu_page( 'theme-panel','dew','wewe','manage_options','t1','theme_settings_list_category');
+    add_menu_page("تنظیمات قالب", "تنظیمات قالب", "manage_options", "theme-panel", "theme_settings_list_category", null, 99);
+//    add_submenu_page( 'theme-panel','dew','تنظیمات دسته بندی قالب','manage_options','t1','theme_settings_list_category');
 }
 
 function theme_settings_list_category(){

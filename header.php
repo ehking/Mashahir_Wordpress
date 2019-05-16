@@ -25,9 +25,7 @@
     <?php wp_head(); ?>
 </head>
 <body>
-
 <div class="row">
-
     <?php
     if (! is_admin_bar_showing() ) {
        ?>
@@ -39,13 +37,6 @@
     <?php
     }
     ?>
-<!--    <button class="d-block d-sm-none" data-toggle="collapse" data-target="#SearchParameters">Toggle it</button>-->
-<!---->
-<!--    <div class="d-none  col-md-12 col-sm-12 SearchParameters" id="SearchParameters">-->
-<!--        wefwef-->
-<!--    </div>-->
-
-
     <nav class="d-lg-none d-xl-none col-sm-12 navbar navbar-expand-lg navbar-light bg-light">
         <button class="navbar-toggler d-block d-sm-none" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -57,14 +48,15 @@
             <ul>
                 <li>
                     <div class="row ">
-                        <div class="col-sm-12">
+                        <div class="col-sm-12 Top_Menu_mobile">
                             <?php wp_nav_menu( array( 'theme_location' => 'Top_Menu' ,'container'=>'')); ?>
                         </div>
                     </div>
                 </li>
                 <li>
                     <hr>
-                        <h3>بخش بندی</h3>
+                        <h3 style="text-align: right">دسته بندی</h3>
+                    <ul class="Cat_Menu_mobile">
                         <?php
                         $categories = get_categories(array(
                             "hide_empty"=>"0",
@@ -85,7 +77,7 @@
                             }
                         }
     //                    ?>
-
+                    </ul>
                     </li>
                 </li>
             </ul>
