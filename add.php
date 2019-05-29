@@ -130,10 +130,13 @@ function alert($msgg,$ico){
                                 }else{
                                     $ta="<span></span>";
                                 }
-                                if(has_post_thumbnail()){
-                                    $img=get_the_post_thumbnail_url();
+                                $pod = pods( 'mashahir', get_the_id() );
+                                $related = $pod->field( 'img' );
+
+                                if($related){
+                                    $img=$related[0]['guid'];
                                 } else {
-                                    $img= get_stylesheet_directory_uri().'/img/index/1.png';
+                                    $img= get_stylesheet_directory_uri().'/img/index/1.jpg';
                                 }
                                 echo '
                 <div class="col-sm-12">

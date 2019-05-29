@@ -192,6 +192,15 @@ function theme_slug_widgets_init() {
 
 }
 
+//add_action( 'rest_api_init', function () {
+//    register_rest_route( 'myplugin/v1', '/author', array(
+//        'methods' => 'GET',
+//        'callback' => 'my_awesome_func',
+//    ) );
+//} );
+//function my_awesome_func(){
+//    return "ewr";
+//}
 function create_post_type() {
     register_post_type( 'Mashahir',
         array(
@@ -208,7 +217,7 @@ function create_post_type() {
             'public' => true,
             'has_archive' => true,
             'editor'=>true,
-            'taxonomies'  => array( 'category' ),
+            'taxonomies'  => array( 'category','post_tag' ),
             'show_in_rest'=>true,
             'rest_base'=> 'Mashahir',
 
